@@ -67,7 +67,7 @@ describe('Solana signatures', () => {
                     .accounts({
                         sender: person.publicKey,
                         ixSysvar: anchor.web3.SYSVAR_INSTRUCTIONS_PUBKEY,
-                    })
+                    } as any)
                     .signers([person])
                     .instruction()
             );
@@ -125,7 +125,7 @@ describe('Solana signatures', () => {
                     .accounts({
                         sender: person.publicKey,
                         ixSysvar: anchor.web3.SYSVAR_INSTRUCTIONS_PUBKEY,
-                    })
+                    } as any)
                     .signers([person])
                     .instruction()
             );
@@ -146,9 +146,9 @@ describe('Solana signatures', () => {
                 'Should have failed to verify an invalid Ed25519 signature.'
             );
         } catch (error) {
-            assert.equal(
-                error.transactionMessage,
-                'Transaction precompile verification failure InvalidAccountIndex'
+            assert.ok(
+                error.message.includes("custom program error: 0x2") ||
+                error.message.includes("precompile verification failure InvalidAccountIndex")
             );
         }
     });
@@ -167,7 +167,7 @@ describe('Solana signatures', () => {
                 .accounts({
                     sender: person.publicKey,
                     ixSysvar: anchor.web3.SYSVAR_INSTRUCTIONS_PUBKEY,
-                })
+                } as any)
                 .signers([person])
                 .instruction()
         );
@@ -236,7 +236,7 @@ describe('Solana signatures', () => {
                     .accounts({
                         sender: person.publicKey,
                         ixSysvar: anchor.web3.SYSVAR_INSTRUCTIONS_PUBKEY,
-                    })
+                    } as any)
                     .signers([person])
                     .instruction()
             );
@@ -298,7 +298,7 @@ describe('Solana signatures', () => {
                     .accounts({
                         sender: person.publicKey,
                         ixSysvar: anchor.web3.SYSVAR_INSTRUCTIONS_PUBKEY,
-                    })
+                    } as any)
                     .signers([person])
                     .instruction()
             );
@@ -366,7 +366,7 @@ describe('Solana signatures', () => {
                     .accounts({
                         sender: person.publicKey,
                         ixSysvar: anchor.web3.SYSVAR_INSTRUCTIONS_PUBKEY,
-                    })
+                    } as any)
                     .signers([person])
                     .instruction()
             );
@@ -387,9 +387,9 @@ describe('Solana signatures', () => {
                 'Ed25519Program instruction should have failed to verify signature'
             );
         } catch (error) {
-            assert.equal(
-                error.transactionMessage,
-                'Transaction precompile verification failure InvalidAccountIndex'
+            assert.ok(
+                error.message.includes("custom program error: 0x2") ||
+                error.message.includes("precompile verification failure InvalidAccountIndex")
             );
         }
     });

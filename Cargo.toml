@@ -5,3 +5,6 @@ members = [
 
 [profile.release]
 overflow-checks = true
+
+[patch.crates-io]
+ahash = { git = "https://github.com/tkaitchuck/ahash", rev = "db36e4c4f0606b786bc617eefaffbe4ae9100762" }
